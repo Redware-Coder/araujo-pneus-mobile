@@ -1,0 +1,286 @@
+"use client";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Link from "next/link";
+import { Package, Home, BoxIcon, LayoutDashboard, Menu, Circle, Funnel, ChevronDown, Command, Repeat2, Wallet, CircleDollarSign, BanknoteArrowUp, BanknoteArrowDown, UserRound, SquareKanban, Box, Factory } from "lucide-react";
+import { Tooltip, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { TooltipContent } from "@radix-ui/react-tooltip";
+import { useState } from "react"
+import {  Popover,  PopoverContent,  PopoverDescription,  PopoverHeader,  PopoverTitle,  PopoverTrigger,} from "@/components/ui/popover"
+import { Filtro } from "../Filtro";
+import { useFiltro } from "../contexts/FiltroContext";
+
+
+export function Sidebar() {
+
+  const [lojaSelecionada, setLojaSelecionada] = useState<string>("")
+  const [periodoSelecionado, setPeriodoSelecionado] = useState<string>("")
+  const [openFiltro, setOpenFiltro] = useState(false)
+  const { filtros, setFiltros } = useFiltro()
+
+
+  const lojaCidade = [
+    "Todas as Lojas", "Tocantins", "Pará", "Araguaína", "Matriz & T. de A",
+    "Matriz", "Michelin-TO", "T. de A", "Novo Repartimento", "Palmas",
+    "Parauapebas", "Canaã", "Michelin-PA", "Borracharia",
+    "Augustinópolis", "Paraíso", "Xinguara"
+  ]
+
+  const periodo = [
+    "Hoje", "Janeiro", "Fevereiro", "Março", "Abril", "Maio",
+    "Junho", "Julho", "Agosto", "Setembro", "Outubro",
+    "Novembro", "Dezembro"
+  ]
+ 
+ return (
+   <div className="flex w-full flex-col top-0">
+
+    <aside className="fixed inset-y-0  left-0 z-10 hidden w-14 border-r bg-background sm:flex flex-col">
+      <nav className="flex flex-col items-center gap-4 px-2 py-5">
+        <TooltipProvider>
+          <Link href="#" className="flex w-9 h-9 shrink-0 items-center justify-center
+           bg-primary text-primary-foreground rounded-full">
+            <Package className="w-4 h-4"/>
+            <span className="sr-only">Araújo Pneus</span>
+          </Link>        
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/main" className="flex w-9 h-9 shrink-0 items-center justify-center
+                rounded-lg text-muted-foreground transition-colors hover:text-foreground">
+                <LayoutDashboard className="w-6 h-6"/>
+                <span className="sr-only">Dashboard</span>
+              </Link> 
+            </TooltipTrigger>
+            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
+              Dashboard</TooltipContent>
+          </Tooltip>
+
+           <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/consultaProd" className="flex w-9 h-9 shrink-0 items-center justify-center 
+                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+                onClick={() => setFiltros({...filtros, pagina: "Produtos"})}>
+                <Box className="w-6 h-6"/>
+                <span className="sr-only">Consultar Produtos</span>
+              </Link> 
+            </TooltipTrigger>
+            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
+              Consultar Produtos</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/estoque" className="flex w-9 h-9 shrink-0 items-center justify-center 
+                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+                onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
+                <Factory className="w-6 h-6"/>
+                <span className="sr-only">Estoque</span>
+              </Link> 
+            </TooltipTrigger>
+            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
+              Estoque</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/giro" className="flex w-9 h-9 shrink-0 items-center justify-center 
+                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+                onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
+                <Repeat2 className="w-6 h-6"/>
+                <span className="sr-only">Giro de Pneus</span>
+              </Link> 
+            </TooltipTrigger>
+            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
+              Giro de Pneus</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/contas" className="flex w-9 h-9 shrink-0 items-center justify-center 
+                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+                onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
+                <BanknoteArrowUp className="w-6 h-6"/>
+                <span className="sr-only">Contas a Receber / Pagar</span>
+              </Link> 
+            </TooltipTrigger>
+            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
+              Contas a Receber / Pagar</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/boletosVencidos" className="flex w-9 h-9 shrink-0 items-center justify-center 
+                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+                onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
+                <SquareKanban className="w-6 h-6"/>
+                <span className="sr-only">Boletos em atraso</span>
+              </Link> 
+            </TooltipTrigger>
+            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
+              Boletos em atraso</TooltipContent>
+          </Tooltip>
+
+        </TooltipProvider>        
+      </nav>
+    </aside>
+    
+    {filtros.pagina !== "Intro" && (
+    <div className="sm:hidden flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+      <header className="fixed bg-black w-full top-0 z-30 flex h-14 items-center px-4 gap-4 
+       sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+        <Sheet>
+          <div className="w-full flex flex-row items-center justify-between">
+              <SheetTrigger asChild>
+                <Menu className="w-6 h-6 ml-1 transition-all text-yellow-400 "/>
+              </SheetTrigger>
+              <div className=" w-20 h-10 mt-2 ml-24 bg-contain bg-center bg-no-repeat bg-[url('/LogoFHD-BRANCO.png')]"></div>
+              <span className="sr-only">Logo</span>  
+              <div className="w-38 flex flex-row text-white justify-end">
+                <div className="w-auto">
+                  <div  style={{textAlign: 'right', fontSize: '11px',  }}>Loja: {filtros.lojaCidade}</div>
+                  
+                  {(filtros.pagina !== "Produtos" && filtros.pagina !== "Estoque") && (
+                    <div  style={{textAlign: 'right', fontSize: '11px',  }}>               
+                     Período: {filtros.periodo}</div>
+                    )}
+
+                    </div>
+                </div>
+                <Popover open={openFiltro} onOpenChange={setOpenFiltro}>
+                  <PopoverTrigger>
+                    <Funnel className="w-6 h-6 ml-5  transition-all text-yellow-400"/>
+                  </PopoverTrigger>
+                  <PopoverContent align="center" side="bottom" className="w-screen h-screen flex items-center justify-center pb-50 border-0 bg-black/80">
+                    <PopoverHeader>
+                      <PopoverTitle className="text-lg">Filtro</PopoverTitle>
+                      <PopoverDescription>
+                      <Filtro fecharPopover={() => setOpenFiltro(false)}/>
+                      </PopoverDescription>
+                    </PopoverHeader>
+                  </PopoverContent>
+              </Popover>
+              </div>
+              
+                 
+                         
+          <SheetContent side="left" className="sm:max-w-x">
+            <div className="w-full h-38 flex bg-amber-300 bg-[url('/wall_1.jpg')] bg-cover bg-center items-center justify-center">
+              <div className="w-44 h-28 bg-[url('/LogoFHD-BRANCO_SOMBRA.png')] bg-contain bg-center bg-no-repeat">
+              </div>
+            </div>
+            <nav className="grid gap-6 text-lg font-medium pl-5  text-foreground">
+              <Link 
+                href="#"
+                className=" w-10 h-10 bg-primary rounded-full text-lg gap-2
+                items-center justify-center text-primary-foreground md:text-base hidden"              
+              >
+              <Package className="w-5 h-5 transition-all"/> 
+              <span className="sr-only">Logo</span>
+              </Link>              
+
+              <SheetClose asChild>
+                <Link 
+                  href="/main"
+                  className="flex items-center gap-4  px-2.5 foreground hover:text-foreground"              
+                  prefetch={false}
+                  onClick={() => setFiltros({...filtros, pagina: "Dashboard"})}
+                >
+                <LayoutDashboard className="w-5 h-5 transition-all"/>Dashboard
+                </Link>
+              </SheetClose>
+
+              <SheetClose asChild>
+              <Link 
+                href="/consultaProd"
+                className="flex items-center gap-4 px-2.5 "              
+                prefetch={false}
+                onClick={() => setFiltros({...filtros, pagina: "Produtos"})}
+              >
+              <BoxIcon className="w-5 h-5 transition-all"/>Consultar Produtos
+              </Link>
+              </SheetClose>
+
+              <SheetClose asChild>
+              <Link 
+                href="/estoque"
+                className="flex items-center gap-4  px-2.5 "              
+                prefetch={false}
+                onClick={() => setFiltros({...filtros, pagina: "Estoque"})}
+              >
+              <Home className="w-5 h-5 transition-all"/>Estoque
+              </Link>
+              </SheetClose>
+
+            <hr></hr>
+
+            <h1>Análise</h1>              
+              <SheetClose asChild>
+                <Link 
+                  href="/giro"                  
+                  className="flex items-center gap-4  px-2.5 "              
+                  prefetch={false}
+                  onClick={() => setFiltros({...filtros, pagina: "Giro"})
+                  }
+                >
+                <Repeat2 className="w-5 h-5 transition-all"/>Giro de Pneus
+                </Link>
+              </SheetClose>
+
+              <SheetClose asChild>
+              <Link 
+                href="/lt4"
+                className="flex items-center gap-4  px-2.5 "              
+                prefetch={false}
+                onClick={() => setFiltros({...filtros, pagina: "LT4"})}
+              >
+              <UserRound className="w-5 h-5 transition-all"/>Clientes
+              </Link>
+              </SheetClose>
+
+              <hr></hr>
+
+              <h1>Financeiro</h1>
+              <SheetClose asChild>
+               <Link 
+                  href="/contas"                  
+                  className="flex items-center gap-4  px-2.5 "              
+                  prefetch={false}
+                  onClick={() => setFiltros({...filtros, pagina: "Contas"})
+                  }
+                >
+                <BanknoteArrowUp className="w-5 h-5 transition-all"/>Contas a Receber / Pagar
+                
+                </Link>
+                </SheetClose>
+               <Link 
+                href="#"
+                className="flex items-center gap-4  px-2.5 "              
+                prefetch={false}
+              >
+              <CircleDollarSign className="w-5 h-5 transition-all"/>Lucratividade
+              </Link>
+               
+               
+              <SheetClose asChild>
+                <Link 
+                  href="/boletosVencidos"                  
+                  className="flex items-center gap-4  px-2.5 "              
+                  prefetch={false}
+                  onClick={() => setFiltros({...filtros, pagina: "Boletos"})
+                  }
+                >
+                <SquareKanban className="w-5 h-5 transition-all"/>Boletos Vencidos
+                </Link>
+              </SheetClose>
+            </nav>
+          </SheetContent>
+        </Sheet>
+
+        
+      </header>
+    </div>
+    )}
+   </div>
+   
+ )
+}

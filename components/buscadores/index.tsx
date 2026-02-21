@@ -1,0 +1,83 @@
+export interface DadosMobile {
+  venda: string;
+  recebido: string;
+  areceber: string;
+  dtAtualizacao: string;
+}
+
+export interface Props{
+  pneu: string;
+  servico: string;
+  outros: string;
+  qtdPneu: string;
+  areceberFinanceiro: number;
+  apagarFinanceiro: number;
+  boletovencido: number;
+}
+
+export interface Lojas{
+  loja: string;
+  nome: string;
+  produto: number;
+  servico: number;
+  total: number;
+  dtAtualizacao: string;
+}
+
+export interface ContasSet{
+  loja: string;
+  nomeLoja: string;
+  areceber: number;
+  apagar: number;
+  saldo: number;
+}
+
+export interface Com{
+  comportamento: string;
+  loja: string;
+  periodo: string;
+  mes: string;
+  ano: string;
+  dataini: string;
+  datafin: string;
+  pagina: string;  
+}
+
+export interface MedidasSet{
+  Medida: string;
+}
+
+export interface GiroSet{
+  medida: string;
+  giro: number;
+  valor: number;
+}
+
+export interface ProdutosSet{
+  loja: string;
+  codigo: number;
+  nome: string;
+  precoCompra: number;
+  precoCusto: number;
+  precoVenda: number;
+  referencia: string;
+  saldo: number;
+}
+
+export interface EstoqueSet{
+  codigo: number;
+  loja: string;
+  saldo: number;
+  valor: number;
+}
+
+export interface BoletosVencidosSet{
+  loja: string;
+  codCliente: number;
+  nome: string;
+  titulo: string;
+  parcela: string;
+  emissao: string;
+  vencimento: string;
+  valor: number;
+}
