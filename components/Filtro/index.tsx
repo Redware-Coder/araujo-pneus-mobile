@@ -1,10 +1,10 @@
 "use client";
-import {  Combobox,  ComboboxContent,  ComboboxEmpty,  ComboboxInput,  ComboboxItem,  ComboboxList,} from "@/components/ui/combobox";
+import {  Combobox,  ComboboxContent,  ComboboxEmpty,  ComboboxInput,  ComboboxItem,  ComboboxList} from "@/components/ui/combobox";
 import {  Popover,  PopoverContent,  PopoverTrigger,} from "@/components/ui/popover";
 import { format, } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "../ui/button";
-import { Com, Lojas, MedidasSet } from "@/components/buscadores";
+import { MedidasSet } from "@/components/buscadores";
 import { useEffect, useState } from "react";
 import { useFiltro } from '@/components/contexts/FiltroContext';
 import { useRef } from "react";

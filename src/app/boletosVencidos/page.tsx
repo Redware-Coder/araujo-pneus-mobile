@@ -1,6 +1,5 @@
 "use client"
 import { useFiltro } from '@/components/contexts/FiltroContext';
-import Produto from '@/components/produto/page';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Box, House, Library, List, Repeat2, SquareKanban } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';

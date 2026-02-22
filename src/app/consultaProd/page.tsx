@@ -1,9 +1,9 @@
 "use client"
 import { useFiltro } from '@/components/contexts/FiltroContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Box, Library, List, Repeat2 } from 'lucide-react';
+import { Box } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { GiroSet, ProdutosSet } from '@/components/buscadores';
+import { ProdutosSet } from '@/components/buscadores';
 import {
   Dialog,
   DialogContent,

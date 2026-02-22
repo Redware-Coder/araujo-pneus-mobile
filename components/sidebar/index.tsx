@@ -1,11 +1,10 @@
 "use client";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
-import { Package, Home, BoxIcon, LayoutDashboard, Menu, Circle, Funnel, ChevronDown, Command, Repeat2, Wallet, CircleDollarSign, BanknoteArrowUp, BanknoteArrowDown, UserRound, SquareKanban, Box, Factory } from "lucide-react";
+import { Package, Home, BoxIcon, LayoutDashboard, Menu, Funnel, Repeat2, BanknoteArrowUp, UserRound, SquareKanban, Box, Factory } from "lucide-react";
 import { Tooltip, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { TooltipContent } from "@radix-ui/react-tooltip";
 import { useState } from "react"
-import {  Popover,  PopoverContent,  PopoverDescription,  PopoverHeader,  PopoverTitle,  PopoverTrigger,} from "@/components/ui/popover"
 import { Filtro } from "../Filtro";
 import { useFiltro } from "../contexts/FiltroContext";
 import {

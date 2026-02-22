@@ -1,9 +1,9 @@
 "use client"
 import { useFiltro } from '@/components/contexts/FiltroContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Box, House, Library, List, Repeat2 } from 'lucide-react';
+import { House } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { EstoqueSet, GiroSet, ProdutosSet } from '@/components/buscadores';
+import { EstoqueSet } from '@/components/buscadores';
 
 export default function Estoque() {
 
