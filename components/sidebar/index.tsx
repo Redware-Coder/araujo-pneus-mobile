@@ -133,10 +133,10 @@ export function Sidebar() {
               <SheetTrigger asChild>
                 <Menu className="w-6 h-6 ml-1 transition-all text-yellow-400 "/>
               </SheetTrigger>
-              <div className=" w-20 h-10 mt-2 ml-24 bg-contain bg-center bg-no-repeat bg-[url('/LogoFHD-BRANCO.png')]"></div>
+              <div className=" w-28 h-10 mt-2 ml-30 bg-contain bg-center bg-no-repeat bg-[url('/LogoFHD-BRANCO.png')]"></div>
               <span className="sr-only">Logo</span>  
-              <div className="w-38 flex flex-row text-white justify-end">
-                <div className="w-auto">
+              <div className="w-36 flex flex-row pr-2 text-white justify-end">
+                <div className="w-26">
                   <div  style={{textAlign: 'right', fontSize: '11px',  }}>Loja: {filtros.lojaCidade}</div>
                   
                   {(filtros.pagina !== "Produtos" && filtros.pagina !== "Estoque") && (
@@ -144,11 +144,11 @@ export function Sidebar() {
                      Período: {filtros.periodo}</div>
                     )}
 
-                    </div>
+                   </div>
                 </div>
                 <Popover open={openFiltro} onOpenChange={setOpenFiltro}>
                   <PopoverTrigger>
-                    <Funnel className="w-6 h-6 ml-5  transition-all text-yellow-400"/>
+                    <Funnel className="w-6 h-6 transition-all text-yellow-400"/>
                   </PopoverTrigger>
                   <PopoverContent align="center" side="bottom" className="w-screen h-screen flex items-center justify-center pb-50 border-0 bg-black/80">
                     <PopoverHeader>
