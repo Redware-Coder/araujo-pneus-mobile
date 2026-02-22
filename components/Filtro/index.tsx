@@ -259,8 +259,8 @@ const medidasLocal2 = [
 
  
  return (
-   <div className="flex w-[35vh] h-[80vh] flex-col top-0 text-black rounded-2xl bg-slate-100 px-5 pt-9">
-    <h1 className="text-lg">Filtro de Busca</h1>
+   <div className="flex text-left w-[35vh] h-auto flex-col top-0 text-black rounded-2xl px-5 pt-9">
+   
     
     {/** COMOBOBOX LOJAS CIDADES ESTADOS ------------------------------------------------------------- */}
      {(filtros.pagina === "Giro" || filtros.pagina === "Dashboard" || filtros.pagina === "Boletos") && (
@@ -270,7 +270,7 @@ const medidasLocal2 = [
                     if (!value) return
                     setLojaSelecionada(value)
                   }}>
-                <ComboboxInput readOnly placeholder="Selecione a Loja ou Cidade" />
+                <ComboboxInput readOnly onFocus={(e) => e.target.blur()}/>
                 <ComboboxContent>
                   <ComboboxEmpty>No items found.</ComboboxEmpty>
                   <ComboboxList>
@@ -292,7 +292,7 @@ const medidasLocal2 = [
                     if (!value) return
                     setLojaSelecionada(value)
                   }}>
-                <ComboboxInput readOnly placeholder="Selecione a Loja ou Cidade" />
+                <ComboboxInput readOnly onFocus={(e) => e.target.blur()}/>
                 <ComboboxContent>
                   <ComboboxEmpty>No items found.</ComboboxEmpty>
                   <ComboboxList>
@@ -314,7 +314,7 @@ const medidasLocal2 = [
                   if (!value) return
                   setPeriodoSelecionado(value)
                 }}>
-                <ComboboxInput readOnly placeholder="Selecione o período" />
+                <ComboboxInput readOnly onFocus={(e) => e.target.blur()}/>
                 <ComboboxContent>
                   <ComboboxEmpty>No items found.</ComboboxEmpty>
                   <ComboboxList>
@@ -390,8 +390,7 @@ const medidasLocal2 = [
                             setMedidaSelecionada(value); inputRef.current?.blur();}}
                             // items={medidaDados.map(m => m.Medida)} value={medidaSelecionada} 
               >
-                <ComboboxInput inputMode="numeric" ref={inputRef}  onFocus={(e) => e.target.select()} // seleciona tudo quando clicar
-                   />
+                <ComboboxInput readOnly onFocus={(e) => e.target.blur()}/>                  
                 <ComboboxContent>
                   <ComboboxEmpty>Nenhuma medida encontrada</ComboboxEmpty>
                   <ComboboxList>
@@ -436,7 +435,7 @@ const medidasLocal2 = [
           )}
 
 
-        <Button className="mt-auto mb-10" onClick={() => {   
+        <Button className="mt-10 mb-10" onClick={() => {   
             aplicarFiltro()
             fecharPopover()
           }}

@@ -183,7 +183,7 @@ export default function ConsultarProd() {
                             </li>                            
                             </DialogTrigger>
 
-                                <DialogContent className="w-full">
+                                <DialogContent className="w-full [&>button]:hidden">
                                   <DialogHeader>
                                     <DialogTitle className='h-10 bg-black text-yellow-400 flex items-center justify-center rounded-lg'>Detalhes do Produto</DialogTitle>
                                   </DialogHeader>

@@ -8,6 +8,14 @@ import { useState } from "react"
 import {  Popover,  PopoverContent,  PopoverDescription,  PopoverHeader,  PopoverTitle,  PopoverTrigger,} from "@/components/ui/popover"
 import { Filtro } from "../Filtro";
 import { useFiltro } from "../contexts/FiltroContext";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 
 export function Sidebar() {
@@ -133,7 +141,7 @@ export function Sidebar() {
               <SheetTrigger asChild>
                 <Menu className="w-6 h-6 ml-1 transition-all text-yellow-400 "/>
               </SheetTrigger>
-              <div className=" w-28 h-10 mt-2 ml-30 bg-contain bg-center bg-no-repeat bg-[url('/LogoFHD-BRANCO.png')]"></div>
+              <div className=" w-28 h-10 mt-2 ml-28 bg-contain bg-center bg-no-repeat bg-[url('/LogoFHD-BRANCO.png')]"></div>
               <span className="sr-only">Logo</span>  
               <div className="w-36 flex flex-row pr-2 text-white justify-end">
                 <div className="w-26">
@@ -146,19 +154,20 @@ export function Sidebar() {
 
                    </div>
                 </div>
-                <Popover open={openFiltro} onOpenChange={setOpenFiltro}>
-                  <PopoverTrigger>
-                    <Funnel className="w-6 h-6 transition-all text-yellow-400"/>
-                  </PopoverTrigger>
-                  <PopoverContent align="center" side="bottom" className="w-screen h-screen flex items-center justify-center pb-50 border-0 bg-black/80">
-                    <PopoverHeader>
-                      <PopoverTitle className="text-lg">Filtro</PopoverTitle>
-                      <PopoverDescription>
-                      <Filtro fecharPopover={() => setOpenFiltro(false)}/>
-                      </PopoverDescription>
-                    </PopoverHeader>
-                  </PopoverContent>
-              </Popover>
+              <Dialog open={openFiltro} onOpenChange={setOpenFiltro}>                
+                <DialogTrigger asChild>
+                  <Funnel className="w-6 h-6 transition-all text-yellow-400 cursor-pointer" />
+                </DialogTrigger>
+
+                <DialogContent className="w-auto h-auto max-w-none border-0 flex items-center justify-center [&>button]:hidden">                  
+                  <DialogHeader>
+                    <DialogTitle className="text-lg">Filtro de Buscas</DialogTitle>
+                    <DialogDescription asChild>
+                      <Filtro fecharPopover={() => setOpenFiltro(false)} />
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
               </div>
               
                  
@@ -213,8 +222,18 @@ export function Sidebar() {
 
             <hr></hr>
 
-            <h1>Análise</h1>              
-              <SheetClose asChild>
+            <h1>Análise</h1>  
+             <SheetClose asChild>
+              <Link 
+                href="/lt4"
+                className="flex items-center gap-4  px-2.5 "              
+                prefetch={false}
+                onClick={() => setFiltros({...filtros, pagina: "LT4"})}
+              >
+              <UserRound className="w-5 h-5 transition-all"/>Clientes
+              </Link>
+              </SheetClose>
+               <SheetClose asChild>
                 <Link 
                   href="/giro"                  
                   className="flex items-center gap-4  px-2.5 "              
@@ -226,39 +245,20 @@ export function Sidebar() {
                 </Link>
               </SheetClose>
 
-              <SheetClose asChild>
-              <Link 
-                href="/lt4"
-                className="flex items-center gap-4  px-2.5 "              
-                prefetch={false}
-                onClick={() => setFiltros({...filtros, pagina: "LT4"})}
-              >
-              <UserRound className="w-5 h-5 transition-all"/>Clientes
-              </Link>
-              </SheetClose>
-
               <hr></hr>
 
-              <h1>Financeiro</h1>
-              <SheetClose asChild>
-               <Link 
-                  href="/contas"                  
+              <h1>Financeiro</h1>              
+                <SheetClose asChild>
+                <Link 
+                  href="/balancete"                  
                   className="flex items-center gap-4  px-2.5 "              
                   prefetch={false}
-                  onClick={() => setFiltros({...filtros, pagina: "Contas"})
+                  onClick={() => setFiltros({...filtros, pagina: "Balancete"})
                   }
                 >
-                <BanknoteArrowUp className="w-5 h-5 transition-all"/>Contas a Receber / Pagar
-                
+                <Repeat2 className="w-5 h-5 transition-all"/>Balancete
                 </Link>
-                </SheetClose>
-               <Link 
-                href="#"
-                className="flex items-center gap-4  px-2.5 "              
-                prefetch={false}
-              >
-              <CircleDollarSign className="w-5 h-5 transition-all"/>Lucratividade
-              </Link>
+              </SheetClose>
                
                
               <SheetClose asChild>
@@ -272,6 +272,18 @@ export function Sidebar() {
                 <SquareKanban className="w-5 h-5 transition-all"/>Boletos Vencidos
                 </Link>
               </SheetClose>
+              <SheetClose asChild>
+               <Link 
+                  href="/contas"                  
+                  className="flex items-center gap-4  px-2.5 "              
+                  prefetch={false}
+                  onClick={() => setFiltros({...filtros, pagina: "Contas"})
+                  }
+                >
+                <BanknoteArrowUp className="w-5 h-5 transition-all"/>Contas a Receber / Pagar
+                
+                </Link>
+                </SheetClose>
             </nav>
           </SheetContent>
         </Sheet>
