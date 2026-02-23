@@ -59,7 +59,8 @@ useEffect(() => {
     try {
       setLoading(true);
 
-      const baseUrl = getApiBaseUrl(ip);
+      //const baseUrl = getApiBaseUrl(ip);
+      const baseUrl = "http://localhost:4143/api/SqlApp";
 
       const dadosFiltro = {
         comportamento: 1,
