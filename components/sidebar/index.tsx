@@ -173,7 +173,7 @@ export function Sidebar() {
                         <DialogHeader>
                           <DialogTitle className="text-lg" >Filtro de Buscas
                           </DialogTitle>
-                          <DialogDescription>Toque na Medida e digite os 3 primeiros números</DialogDescription>
+                          <DialogDescription></DialogDescription>
                         </DialogHeader>
                       
                         <Filtro fecharPopover={() => setOpenFiltro(false)} />

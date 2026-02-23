@@ -404,9 +404,10 @@ const medidasLocal2 = [
                       {item || "(Todas)"}  {/* Mostra algo amigável para a opção em branco */}
                     </ComboboxItem>
                     )}
-                  </ComboboxList>
-                </ComboboxContent>
+                  </ComboboxList>                  
+                </ComboboxContent>                
               </Combobox>
+              <p className="text-gray-500 text-[1.4vh] mt-2">[Toque na Medida e digite apenas os 3 primeiros números]</p>
 
               
             </div>
@@ -432,8 +433,10 @@ const medidasLocal2 = [
                     </ComboboxItem>
                     )}
                   </ComboboxList>
+                  
                 </ComboboxContent>
               </Combobox>
+              <p className="text-gray-500 text-[1.4vh] mt-2">[Toque na Medida e digite apenas os 3 primeiros números]</p>
 
               
             </div>
