@@ -25,26 +25,32 @@ export default function Home() {
 
   const [loading, setLoading] = useState(false)
     
+
+  
   const [ip, setIp] = useState("");
 
-    useEffect(() => {
+  useEffect(() => {
     async function buscarIP() {
-      const res = await fetch("/api");
-      const data = await res.json();
-      setIp(data.ip);    
+      try {
+        const res = await fetch("https://api.ipify.org?format=json");
+        const data = await res.json();
+        setIp(data.ip);
+      } catch (err) {
+        console.error("Erro ao buscar IP externo", err);
+      }
     }
 
     buscarIP();
   }, []);
 
   function getApiBaseUrl(ip: string) {
-  if (ip.startsWith("10.") || ip.startsWith("192.168.") || ip.startsWith("127.") || ip.startsWith("187.")) {
-    
+  if (ip.startsWith("177.54.")) {
     return "http://10.1.1.135:4143/api/SqlApp";
   }
 
   return "http://177.54.239.199:4143/api/SqlApp";
-  }
+  
+}
 
 function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
