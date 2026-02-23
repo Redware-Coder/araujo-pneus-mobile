@@ -44,6 +44,7 @@ export default function Home() {
 
   return "http://177.54.239.199:4143/api/SqlApp";
   }
+  
 
 function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));

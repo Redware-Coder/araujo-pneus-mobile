@@ -395,7 +395,7 @@ const medidasLocal2 = [
                             setMedidaSelecionada(value); inputRef.current?.blur();}}
                             // items={medidaDados.map(m => m.Medida)} value={medidaSelecionada} 
               >
-                <ComboboxInput readOnly onFocus={(e) => e.target.blur()}/>                  
+                <ComboboxInput inputMode="numeric" ref={inputRef}  onFocus={(e) => e.target.select()} />                  
                 <ComboboxContent>
                   <ComboboxEmpty>Nenhuma medida encontrada</ComboboxEmpty>
                   <ComboboxList>
@@ -413,7 +413,7 @@ const medidasLocal2 = [
           )}
 
           {(filtros.pagina === "Produtos") && (
-            <div className='w-fit mt-6'>
+            <div className='w-fit'>
               <h2 className='mb-1 text-gray-700'>Medida:</h2>
               <Combobox  items={medidasLocal} value={medidaSelecionada}
                 onValueChange={(value) => {
