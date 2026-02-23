@@ -48,7 +48,7 @@ export default function Home() {
 function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+const baseUrl = "http://localhost:4143/api/SqlApp";
 useEffect(() => {
   if (!ip || !filtros.medida) return;
 
@@ -56,60 +56,53 @@ useEffect(() => {
   const signal = controller.signal;
 
   async function carregarDados() {
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      //const baseUrl = getApiBaseUrl(ip);
-      const baseUrl = "http://localhost:4143/api/SqlApp";
+    const dadosFiltro = {
+      comportamento: 1,
+      loja: filtros.lojaCidade,
+      periodo: filtros.periodo,
+      mes: new Date().getMonth() + 1,
+      ano: new Date().getFullYear(),
+      dataini: filtros.dataInicial,
+      datafin: filtros.dataFinal,
+      referencia: "",
+      medida: filtros.medida
+    };
 
-      const dadosFiltro = {
-        comportamento: 1,
-        loja: filtros.lojaCidade,
-        periodo: filtros.periodo,
-        mes: new Date().getMonth() + 1,
-        ano: new Date().getFullYear(),
-        dataini: filtros.dataInicial,
-        datafin: filtros.dataFinal,
-        referencia: "",
-        medida: filtros.medida
-      };
+    // 1️⃣ Primeiro envia filtro
+    await fetch(`${baseUrl}/UpComunicacao`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dadosFiltro),
+      signal
+    });
 
-      // 1️⃣ Primeiro envia filtro
-      await fetch(`${baseUrl}/UpComunicacao`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dadosFiltro),
-        signal
-      });
+    //Espera o sincronizador atualizar as tabelas
+    await delay(4500);
 
-      //Espera o sincronizador atualizar as tabelas
-       await delay(4500);
+    // 2️⃣ Depois busca os dados
+    const [dadosRes, comunicacaoRes] = await Promise.all([
+      fetch(`${baseUrl}/Dados`, { signal }),
+      fetch(`${baseUrl}/Comunicacao`, { signal })
+    ]);
 
-      // 2️⃣ Depois busca os dados
-      const [dadosRes, comunicacaoRes] = await Promise.all([
-        fetch(`${baseUrl}/Dados`, { signal }),
-        fetch(`${baseUrl}/Comunicacao`, { signal })
-      ]);
+    const dados = await dadosRes.json();
+    const comunicacao = await comunicacaoRes.json();
 
-      if (!dadosRes.ok || !comunicacaoRes.ok) {
-        throw new Error("Erro na API");
-      }
+    setInfo(dados);
+    setValores(dados);
+    setCominucacao(comunicacao);
 
-      const dados = await dadosRes.json();
-      const comunicacao = await comunicacaoRes.json();
-
-      setInfo(dados);
-      setValores(dados);
-      setCominucacao(comunicacao);
-
-    } catch (error: any) {
-      if (error.name !== "AbortError") {
-        console.error("Erro ao carregar Dashboard:", error);
-      }
-    } finally {
-      setLoading(false); // 🔥 Só desliga aqui
+  } catch (error: any) {
+    if (error.name !== "AbortError") {
+      console.error("Erro ao carregar Dashboard:", error);
     }
+  } finally {
+    setLoading(false);
   }
+}
 
   carregarDados();
 
