@@ -31,25 +31,30 @@ export default function ConsultarProd() {
   const [info, setInfo] = useState<ProdutosSet[]>([]) 
  
       
-    const [ip, setIp] = useState("");
-  
-      useEffect(() => {
-      async function buscarIP() {
-        const res = await fetch("/api");
-        const data = await res.json();
-        setIp(data.ip);    
-      }
-  
-      buscarIP();
-    }, []);
-  
-    function getApiBaseUrl(ip: string) {
-    if (ip.startsWith("10.") || ip.startsWith("192.168.") || ip.startsWith("127.")) {
-      return "http://10.1.1.135:4143/api/SqlApp";
-    }
-  
-    return "http://177.54.239.199:4143/api/SqlApp";
-    }
+   const [ip, setIp] = useState("");
+   
+     useEffect(() => {
+       async function buscarIP() {
+         try {
+           const res = await fetch("https://api.ipify.org?format=json");
+           const data = await res.json();
+           setIp(data.ip);
+         } catch (err) {
+           console.error("Erro ao buscar IP externo", err);
+         }
+       }
+   
+       buscarIP();
+     }, []);
+   
+     function getApiBaseUrl(ip: string) {
+     if (ip.startsWith("177.54.239.199")) {
+       return "http://10.1.1.135:4143/api/SqlApp";
+     }
+   
+     return "http://177.54.239.199:4143/api/SqlApp";
+     
+   }
    
   
 
