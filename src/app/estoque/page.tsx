@@ -170,11 +170,11 @@ export default function Estoque() {
           
                 {!loading && info.length > 0 && (
                   <ul className="space-y-0">
-                    {info.map((estoque) => (                      
-                          
-                          <li
-                            className="border  p-3 bg-white shadow-sm cursor-pointer hover:bg-slate-50 transition"
-                          >                             
+                    {info.map((estoque) => (
+                            <li
+                              key={`${estoque.codigo}-${estoque.loja}`}
+                              className="border p-3 bg-white shadow-sm cursor-pointer hover:bg-slate-50 transition"
+                            >                            
                               <div className="flex justify-between items-start">
                                 <div className="text-2x1 w-44 text-gray-800 font-semibold">{estoque.codigo} - {estoque.loja}</div>
                                   

@@ -259,7 +259,7 @@ const medidasLocal2 = [
 
  
  return (
-   <div className="flex text-left w-[35vh] h-auto flex-col top-0 text-black rounded-2xl px-5 pt-9">
+   <div className="flex text-left w-[35vh] h-auto flex-col top-0 text-black rounded-2xl px-5">
    
     
     {/** COMOBOBOX LOJAS CIDADES ESTADOS ------------------------------------------------------------- */}
@@ -440,7 +440,7 @@ const medidasLocal2 = [
           )}
 
 
-        <Button className="mt-10 mb-10" onClick={() => {   
+        <Button className="h-12 mt-10 mb-5" onClick={() => {   
             aplicarFiltro()
             fecharPopover()
           }}

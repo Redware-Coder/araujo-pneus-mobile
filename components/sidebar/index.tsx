@@ -11,12 +11,10 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogPortal,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { DialogOverlay } from "@radix-ui/react-dialog";
 
 
 export function Sidebar() {
@@ -173,20 +171,18 @@ export function Sidebar() {
                         className="w-auto h-auto border-0 overflow-visible z-50 [&>button]:hidden"
                       >
                         <DialogHeader>
-                          <DialogTitle className="text-lg">
-                            Filtro de Buscas
+                          <DialogTitle className="text-lg" >Filtro de Buscas
                           </DialogTitle>
+                          <DialogDescription>Toque na Medida e digite os 3 primeiros números</DialogDescription>
                         </DialogHeader>
-
+                      
                         <Filtro fecharPopover={() => setOpenFiltro(false)} />
                       </DialogContent>
                     </Dialog>
                   </>
               </div>
-              
-                 
-                         
-          <SheetContent side="left" className="sm:max-w-x">
+
+          <SheetContent side="left" className="sm:max-w-x [&>button]:hidden">
             <div className="w-full h-38 flex bg-amber-300 bg-[url('/wall_1.jpg')] bg-cover bg-center items-center justify-center">
               <div className="w-44 h-28 bg-[url('/LogoFHD-BRANCO_SOMBRA.png')] bg-contain bg-center bg-no-repeat">
               </div>
@@ -239,7 +235,7 @@ export function Sidebar() {
             <h1>Análise</h1>  
              <SheetClose asChild>
               <Link 
-                href="/lt4"
+                href="#"
                 className="flex items-center gap-4  px-2.5 "              
                 prefetch={false}
                 onClick={() => setFiltros({...filtros, pagina: "LT4"})}

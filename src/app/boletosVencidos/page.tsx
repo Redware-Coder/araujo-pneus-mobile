@@ -146,7 +146,7 @@ export default function Estoque() {
                   <CardHeader className="mb-0">
                     <div className="flex items-center justify-center">
                       <CardTitle className="text-lg sm:text-lg font-normal text-gray-600">                       
-                       <p>Loja selecionada: {filtros.lojaCidade}</p>
+                       Loja selecionada: {filtros.lojaCidade}<br></br>
                        Peíodo selecionado: {filtros.periodo}
                       </CardTitle>
                       <SquareKanban className="ml-auto w-6 h-6"></SquareKanban>
@@ -182,7 +182,7 @@ export default function Estoque() {
                   <ul className="space-y-2">
                     {info.map((vencidos) => (                      
                           
-                          <li
+                          <li key={`${vencidos.loja}-${vencidos.titulo}`}
                             className="border  p-3 bg-white text-gray-600  shadow-sm cursor-pointer hover:bg-slate-50 transition">  
                             
                              <div className="text-2x1 w-full text-red-600 font-semibold">{vencidos.codCliente} - {vencidos.nome}</div>                       
@@ -206,7 +206,7 @@ export default function Estoque() {
 
                                 <div className="text-sm w-24 ">
                                   <p> 
-                                    <p>Valor: </p>
+                                    Valor:<br></br>
                                     {vencidos.valor.toLocaleString("pt-BR", {
                                           minimumFractionDigits: 2,
                                           maximumFractionDigits: 2,
