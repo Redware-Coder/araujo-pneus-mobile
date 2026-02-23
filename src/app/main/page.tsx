@@ -38,7 +38,7 @@ export default function Home() {
   }, []);
 
   function getApiBaseUrl(ip: string) {
-  if (ip.startsWith("10.") || ip.startsWith("192.168.") || ip.startsWith("127.")) {
+  if (ip.startsWith("10.") || ip.startsWith("192.168.") || ip.startsWith("127.") || ip.startsWith("187.")) {
     
     return "http://10.1.1.135:4143/api/SqlApp";
   }
