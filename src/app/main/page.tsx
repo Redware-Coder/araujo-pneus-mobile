@@ -37,14 +37,21 @@ export default function Home() {
     buscarIP();
   }, []);
 
-  function getApiBaseUrl(ip: string) {
-  if (ip.startsWith("10.") || ip.startsWith("192.168.") || ip.startsWith("127.") || ip.startsWith("187.")) {
-    
-    return "http://10.1.1.135:4143/api/SqlApp";
+  function getApiBaseUrl() {
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname;
+
+    if (host.startsWith("10.") || host.startsWith("192.168.") || host.startsWith("127.")) {
+      return "http://10.1.1.135:4143/api/SqlApp";
+    }
   }
 
   return "http://177.54.239.199:4143/api/SqlApp";
-  }
+}
+
+// Uso:
+
+//const baseUrl = process.env.NEXT_PUBLIC_API_URL!;
 
 function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -59,8 +66,8 @@ useEffect(() => {
   async function carregarDados() {
     try {
       setLoading(true);
-
-      const baseUrl = getApiBaseUrl(ip);
+      
+      const baseUrl = getApiBaseUrl(); // ⚠️ sem passar ip
 
       const dadosFiltro = {
         comportamento: 1,
