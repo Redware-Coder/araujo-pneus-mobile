@@ -11,10 +11,12 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogPortal,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { DialogOverlay } from "@radix-ui/react-dialog";
 
 
 export function Sidebar() {
@@ -153,20 +155,33 @@ export function Sidebar() {
 
                    </div>
                 </div>
-              <Dialog open={openFiltro} onOpenChange={setOpenFiltro}>                
-                <DialogTrigger asChild>
-                  <Funnel className="w-6 h-6 transition-all text-yellow-400 cursor-pointer" />
-                </DialogTrigger>
+                  <>
+                    {openFiltro && (
+                      <div className="fixed inset-0 bg-black/50 z-40" />
+                    )}
 
-                <DialogContent className="w-auto h-auto max-w-none border-0 flex items-center justify-center [&>button]:hidden">                  
-                  <DialogHeader>
-                    <DialogTitle className="text-lg">Filtro de Buscas</DialogTitle>
-                    <DialogDescription asChild>
-                      <Filtro fecharPopover={() => setOpenFiltro(false)} />
-                    </DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
+                    <Dialog
+                      modal={false}
+                      open={openFiltro}
+                      onOpenChange={setOpenFiltro}
+                    >
+                      <DialogTrigger asChild>
+                        <Funnel className="w-6 h-6 transition-all text-yellow-400 cursor-pointer" />
+                      </DialogTrigger>
+
+                      <DialogContent
+                        className="w-auto h-auto border-0 overflow-visible z-50 [&>button]:hidden"
+                      >
+                        <DialogHeader>
+                          <DialogTitle className="text-lg">
+                            Filtro de Buscas
+                          </DialogTitle>
+                        </DialogHeader>
+
+                        <Filtro fecharPopover={() => setOpenFiltro(false)} />
+                      </DialogContent>
+                    </Dialog>
+                  </>
               </div>
               
                  

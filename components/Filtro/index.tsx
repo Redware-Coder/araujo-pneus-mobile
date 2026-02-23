@@ -264,24 +264,29 @@ const medidasLocal2 = [
     
     {/** COMOBOBOX LOJAS CIDADES ESTADOS ------------------------------------------------------------- */}
      {(filtros.pagina === "Giro" || filtros.pagina === "Dashboard" || filtros.pagina === "Boletos") && (
-            <div className='w-fit mb-6'>
-              <h2 className='mt-5 mb-1 text-gray-700'>Selecione Loja, Cidade ou Estado:</h2>
-              <Combobox defaultValue={filtros.periodo} items={lojaCidade} value={lojaSelecionada} onValueChange={(value) => {
+            <div className='w-fit mb-6 bg'>
+              <h2 className='mb-1 text-gray-700'>Selecione Loja, Cidade ou Estado:</h2>
+              <Combobox
+                  defaultValue={filtros.periodo}
+                  items={lojaCidade}
+                  value={lojaSelecionada}
+                  onValueChange={(value) => {
                     if (!value) return
                     setLojaSelecionada(value)
-                  }}>
-                <ComboboxInput readOnly onFocus={(e) => e.target.blur()}/>
-                <ComboboxContent>
-                  <ComboboxEmpty>No items found.</ComboboxEmpty>
-                  <ComboboxList>
-                    {(item) => (
-                      <ComboboxItem key={item} value={item}>
+                  }}
+                >
+                  <ComboboxInput readOnly />
+                  <ComboboxContent>
+                    <ComboboxEmpty>No items found.</ComboboxEmpty>
+                    <ComboboxList>
+                      {(item) => (
+                        <ComboboxItem key={item} value={item}>
                           {item}
-                  </ComboboxItem>
-                    )}
-                  </ComboboxList>
-                </ComboboxContent>
-              </Combobox>
+                        </ComboboxItem>
+                      )}
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
       </div>)}
 
       {/** COMOBOBOX SOMENTE LOJAS ------------------------------------------------------------- */}
@@ -292,8 +297,8 @@ const medidasLocal2 = [
                     if (!value) return
                     setLojaSelecionada(value)
                   }}>
-                <ComboboxInput readOnly onFocus={(e) => e.target.blur()}/>
-                <ComboboxContent>
+                <ComboboxInput readOnly/>
+                <ComboboxContent >
                   <ComboboxEmpty>No items found.</ComboboxEmpty>
                   <ComboboxList>
                     {(item) => (
@@ -314,7 +319,7 @@ const medidasLocal2 = [
                   if (!value) return
                   setPeriodoSelecionado(value)
                 }}>
-                <ComboboxInput readOnly onFocus={(e) => e.target.blur()}/>
+                <ComboboxInput readOnly />
                 <ComboboxContent>
                   <ComboboxEmpty>No items found.</ComboboxEmpty>
                   <ComboboxList>
