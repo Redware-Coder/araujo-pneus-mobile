@@ -38,13 +38,13 @@ export default function Home() {
   }, []);
 
   function getApiBaseUrl(ip: string) {
-  if (ip.startsWith("10.") || ip.startsWith("192.168.") || ip.startsWith("127.") || ip.startsWith("187.")) {
-    return "http://187.77.51.29:4143/api/SqlApp";
+  if (ip.startsWith("10.") || ip.startsWith("192.168.") || ip.startsWith("127.")) {
+    
+    return "http://10.1.1.135:4143/api/SqlApp";
   }
 
   return "http://177.54.239.199:4143/api/SqlApp";
   }
-  
 
 function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
