@@ -81,3 +81,28 @@ export interface BoletosVencidosSet{
   vencimento: string;
   valor: number;
 }
+
+export interface BalanceteSet{
+  faturamento: number;
+  vendaProd: number;
+  custoMateria: number;
+  lucroBruto: number;
+  vendaServ: number;
+  receitaFixa: number;
+  boniEntrada: number;
+  totalReceitas: number;
+  despesasFixas: number;
+  despesasVariaveis: number;
+  totalDespesas: number;
+  boletosAtraso: number;
+  boniSaida: number;
+  tAvarias: number;
+  tComodatos: number;
+  tDescFin: number;
+  tPerdido: number;
+  tOutros: number;
+  descontoC: number;
+  lucroBrutoGeral: number;
+  investimentos: number;
+  lucroLiquido: number;
+}

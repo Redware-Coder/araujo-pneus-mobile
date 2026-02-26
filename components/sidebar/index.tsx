@@ -1,7 +1,7 @@
 "use client";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
-import { Package, Home, BoxIcon, LayoutDashboard, Menu, Funnel, Repeat2, BanknoteArrowUp, UserRound, SquareKanban, Box, Factory } from "lucide-react";
+import { Package, Home, BoxIcon, LayoutDashboard, Menu, Funnel, Repeat2, BanknoteArrowUp, UserRound, SquareKanban, Box, Factory, Scale } from "lucide-react";
 import { Tooltip, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { TooltipContent } from "@radix-ui/react-tooltip";
 import { useState } from "react"
@@ -100,18 +100,18 @@ export function Sidebar() {
             <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
               Giro de Pneus</TooltipContent>
           </Tooltip>
-
+          
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href="/contas" className="flex w-9 h-9 shrink-0 items-center justify-center 
                 rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
                 onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
-                <BanknoteArrowUp className="w-6 h-6"/>
-                <span className="sr-only">Contas a Receber / Pagar</span>
+                <Scale className="w-6 h-6"/>
+                <span className="sr-only">DRE - Balantece</span>
               </Link> 
             </TooltipTrigger>
             <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
-              Contas a Receber / Pagar</TooltipContent>
+              DRE - Balantece</TooltipContent>
           </Tooltip>
 
           <Tooltip>
@@ -125,6 +125,19 @@ export function Sidebar() {
             </TooltipTrigger>
             <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
               Boletos em atraso</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/contas" className="flex w-9 h-9 shrink-0 items-center justify-center 
+                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+                onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
+                <BanknoteArrowUp className="w-6 h-6"/>
+                <span className="sr-only">Contas a Receber / Pagar</span>
+              </Link> 
+            </TooltipTrigger>
+            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
+              Contas a Receber / Pagar</TooltipContent>
           </Tooltip>
 
         </TooltipProvider>        
@@ -144,7 +157,9 @@ export function Sidebar() {
               <span className="sr-only">Logo</span>  
               <div className="w-36 flex flex-row pr-2 text-white justify-end">
                 <div className="w-26">
-                  <div  style={{textAlign: 'right', fontSize: '11px',  }}>Loja: {filtros.lojaCidade}</div>
+                  {filtros.pagina !== "teste" && (
+                    <div  style={{textAlign: 'right', fontSize: '11px',  }}>Loja: {filtros.lojaCidade}
+                    </div>)}
                   
                   {(filtros.pagina !== "Produtos" && filtros.pagina !== "Estoque") && (
                     <div  style={{textAlign: 'right', fontSize: '11px',  }}>               
@@ -260,13 +275,13 @@ export function Sidebar() {
               <h1>Financeiro</h1>              
                 <SheetClose asChild>
                 <Link 
-                  href="/balancete"                  
+                  href="#"                  
                   className="flex items-center gap-4  px-2.5 "              
                   prefetch={false}
                   onClick={() => setFiltros({...filtros, pagina: "Balancete"})
                   }
                 >
-                <Repeat2 className="w-5 h-5 transition-all"/>Balancete
+                <Scale className="w-5 h-5 transition-all"/>DRE - Balantece
                 </Link>
               </SheetClose>
                

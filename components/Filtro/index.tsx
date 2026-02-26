@@ -53,6 +53,12 @@ export function Filtro({ fecharPopover }: FiltroProps) {
     "Augustinópolis", "Paraíso", "Xinguara"
   ]
 
+  const loja2 = [
+    "Todas", "Matriz +", "Matriz", "Michelin-TO", "Rovanny", "T. de A", "Novo Repartimento", "Palmas",
+    "Parauapebas", "Canaã", "Michelin-PA", "Borracharia",
+    "Augustinópolis", "Paraíso", "Xinguara"
+  ]
+
   const periodo = [
     "Hoje", "Manual", "Janeiro", "Fevereiro", "Março", "Abril", "Maio",
     "Junho", "Julho", "Agosto", "Setembro", "Outubro",
@@ -310,9 +316,31 @@ const medidasLocal2 = [
                 </ComboboxContent>
               </Combobox>
       </div>)}
+
+      {/** COMOBOBOX Matriz + ------------------------------------------------------------- */}
+      {filtros.pagina === "Balancete"  && (
+            <div className='w-fit mb-6'>
+              <h2 className='mt-5 mb-1 text-gray-700'>Selecione uma Loja:</h2>
+              <Combobox defaultValue={filtros.periodo} items={loja2} value={lojaSelecionada} onValueChange={(value) => {
+                    if (!value) return
+                    setLojaSelecionada(value)
+                  }}>
+                <ComboboxInput readOnly/>
+                <ComboboxContent >
+                  <ComboboxEmpty>No items found.</ComboboxEmpty>
+                  <ComboboxList>
+                    {(item) => (
+                      <ComboboxItem key={item} value={item}>
+                          {item}
+                  </ComboboxItem>
+                    )}
+                  </ComboboxList>
+                </ComboboxContent>
+              </Combobox>
+      </div>)}
       
       {/** COMOBOBOX TODOS OS PERIODOS ------------------------------------------------------------- */}      
-      {(filtros.pagina === "Giro" || filtros.pagina === "Dashboard" || filtros.pagina === "Contas" || filtros.pagina === "Boletos") && (
+      {(filtros.pagina === "Giro" || filtros.pagina === "Dashboard" || filtros.pagina === "Contas" || filtros.pagina === "Boletos" || filtros.pagina === "Balancete") && (
             <div className='w-fit'>
               <h2 className='mb-1 text-gray-700'>Período:</h2>
               <Combobox items={periodo} defaultValue={periodo[0]} value={periodoSelecionado} onValueChange={(value) => {

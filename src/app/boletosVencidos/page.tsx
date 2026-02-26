@@ -21,7 +21,6 @@ export default function Estoque() {
     useEffect(() => {
       setFiltros((prev) => ({
         ...prev,
-        medida: "Todas",
         pagina: "Boletos",
         lojaCidade: "Todas",
         periodo: filtros.periodo

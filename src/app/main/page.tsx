@@ -15,7 +15,7 @@ export default function Home() {
         ...prev,
         pagina: "Dashboard",
         lojaCidade: "Todas",
-        periodo: filtros.periodo
+        periodo: "Hoje"
       }));
     }, []);
 
@@ -163,15 +163,24 @@ useEffect(() => {
           <CardDescription>Vendas da(s) Loja(s), Cidade ou Estado </CardDescription>
         </CardHeader>
         <CardContent className="pl-4 pr-4">
-        <div className="flex items-center justify-between flex-row">
-          <div className="w-auto">            
-            <div className="text-lg sm:text-[1.4vh] lg:text-lg text-green-700">Vendido:</div>
+          <div className="w-auto flex justify-center text-lg sm:text-[1.4vh] font-semibold lg:text-lg text-green-700">Vendido:</div>
+          <div className='w-auto mb-3 flex flex-row items-center justify-center'>            
+            <div className="text-lg sm:text-[1.4vh] mr-4 sm:hidden lg:text-lg lg:block text-gray-500 font-semibold">R$ </div>
+             {loading ? (
+              <div className="w-auto flex flex-col gap-2">
+                <div className="h-5 w-24 bg-gray-300 rounded animate-pulse" />
+              </div>
+            ) : (info.length > 0 && (
+            <div className="text-[4vh] sm:text-[1.4vh] lg:text-lg justify-center flex font-semibold text-green-700">{info[0].venda}</div>))}
+          </div>
+
+        <div className="flex items-center justify-between flex-row">          
+          <div className="w-auto">                    
             <div className="text-lg sm:text-[1.4vh] lg:text-lg text-blue-700">Recebido:</div>
             <div className="text-lg sm:text-[1.4vh] lg:text-lg text-orange-500">A Receber:</div>
           </div>
 
           <div className="w-auto">
-            <div className="text-lg  sm:text-[1.4vh] sm:hidden lg:text-lg lg:block text-green-700">R$:</div>
             <div className="text-lg  sm:text-[1.4vh] sm:hidden lg:text-lg lg:block text-blue-700">R$:</div>
             <div className="text-lg  sm:text-[1.4vh] sm:hidden lg:text-lg lg:block text-orange-500">R$:</div>
           </div>
@@ -183,7 +192,6 @@ useEffect(() => {
               </div>
             ) : (info.length > 0 && (
                           <div className="w-auto flex flex-col">            
-                            <div className="text-lg sm:text-[1.4vh] lg:text-lg  flex justify-end text-green-700">{info[0].venda}</div>
                             <div className="text-lg sm:text-[1.4vh] lg:text-lg flex justify-end text-blue-700">{info[0].recebido}</div>
                             <div className="text-lg sm:text-[1.4vh] lg:text-lg flex justify-end text-orange-500">{info[0].areceber}</div>
                           
@@ -203,7 +211,7 @@ useEffect(() => {
           </div>
           <CardDescription>Valores separados por tipo</CardDescription>          
         </CardHeader>
-        <CardContent className="pl-4 pr-4 text-gray-800">
+        <CardContent className="px-4 text-gray-800">
          <div className="flex items-center justify-between flex-row mb-2">
             <div className="text-lg  sm:text-[1.4vh] lg:text-lg font-semibold">Qtd de Pneus Vendidos:</div>
 
@@ -214,8 +222,8 @@ useEffect(() => {
             ) : (valor.length > 0 && (
               <div className="text-lg sm:text-[1.4vh] lg:text-lg font-semibold flex justify-end">{valor[0].qtdPneu}</div>
             ))}
-        </div>
-        <div className="flex items-center justify-between flex-row">
+        </div><hr></hr>
+        <div className="flex items-center justify-between flex-row mt-2">
           <div className="w-auto">
             <div className="text-lg  sm:text-[1.4vh] lg:text-lg font-bol">Pneus:</div>
             <div className="text-lg  sm:text-[1.4vh] lg:text-lg font-bol">Serviços:</div>
@@ -326,7 +334,6 @@ useEffect(() => {
 
  <section className="mt-4 flex flex-col md:flex-row gap-4">  
     <Grid/>
-    <ChartOverview/>
  </section>
 
    </main>

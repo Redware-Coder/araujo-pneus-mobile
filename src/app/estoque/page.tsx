@@ -125,7 +125,7 @@ export default function Estoque() {
   
 
  return (  
-   <main className="sm:ml-14 p-2 bg-slate-100 h-screen md:h-auto">
+   <main className="sm:ml-14 p-2 bg-slate-100 h-screen">
     <div className=" w-full h-auto flex items-center flex-row mt-14 sm:mt-2">
           <div className='w-full h-auto flex items-left flex-col '>
             <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Estoque Geral</h1>           
@@ -204,7 +204,7 @@ export default function Estoque() {
                     ))}
                   </ul>
                 )}
-                <div className='h-12 flex justify-between border  p-3 bg-black shadow-sm font-semibold items-center text-white'>
+                <div className='h-12 flex justify-between p-3 bg-black shadow-sm font-semibold items-center text-white'>
                         <div className='w-44 pl-3'>Total</div>
                         {loading ? (
                         <>
