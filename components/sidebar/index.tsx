@@ -286,7 +286,7 @@ export function Sidebar() {
               <h1>Financeiro</h1>              
                 <SheetClose asChild>
                 <Link 
-                  href="#"                  
+                  href="/balancete"                  
                   className="flex items-center gap-4  px-2.5 "              
                   prefetch={false}
                   onClick={() => setFiltros({...filtros, pagina: "Balancete"})
