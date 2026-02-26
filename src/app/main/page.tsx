@@ -190,7 +190,6 @@ useEffect(() => {
               <div className="w-auto flex flex-col gap-2">
                 <div className="h-5 w-24 bg-gray-300 rounded animate-pulse" />
                 <div className="h-5 w-24 bg-gray-300 rounded animate-pulse" />
-                <div className="h-5 w-24 bg-gray-300 rounded animate-pulse" />
               </div>
             ) : (info.length > 0 && (
                           <div className="w-auto flex flex-col">            
