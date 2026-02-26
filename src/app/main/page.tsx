@@ -164,7 +164,7 @@ useEffect(() => {
         </CardHeader>
         <CardContent className="pl-4 pr-4">
           <div className="w-auto flex justify-center text-lg sm:text-[1.4vh] font-semibold lg:text-lg text-green-700">Vendido:</div>
-          <div className='w-auto mb-3 flex flex-row items-center justify-center'>            
+          <div className='w-auto mb-2 flex flex-row items-center justify-center'>            
             <div className="text-lg sm:text-[1.4vh] mr-4 sm:hidden lg:text-lg lg:block text-gray-500 font-semibold">R$ </div>
              {loading ? (
               <div className="w-auto flex flex-col gap-2">
@@ -172,7 +172,9 @@ useEffect(() => {
               </div>
             ) : (info.length > 0 && (
             <div className="text-[4vh] sm:text-[1.4vh] lg:text-lg justify-center flex font-semibold text-green-700">{info[0].venda}</div>))}
+            
           </div>
+          
 
         <div className="flex items-center justify-between flex-row">          
           <div className="w-auto">                    

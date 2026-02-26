@@ -1,7 +1,7 @@
 "use client";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Link from "next/link";
-import { Package, Home, BoxIcon, LayoutDashboard, Menu, Funnel, Repeat2, BanknoteArrowUp, UserRound, SquareKanban, Box, Factory, Scale } from "lucide-react";
+import { Package, Home, BoxIcon, LayoutDashboard, Menu, Funnel, Repeat2, BanknoteArrowUp, UserRound, SquareKanban, Box, Factory, Scale, ShoppingCart } from "lucide-react";
 import { Tooltip, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { TooltipContent } from "@radix-ui/react-tooltip";
 import { useState } from "react"
@@ -257,6 +257,17 @@ export function Sidebar() {
               >
               <UserRound className="w-5 h-5 transition-all"/>Clientes
               </Link>
+              </SheetClose>
+              <SheetClose asChild>
+                <Link 
+                  href="#"                  
+                  className="flex items-center gap-4 px-2.5 "              
+                  prefetch={false}
+                  onClick={() => setFiltros({...filtros, pagina: "Giro"})
+                  }
+                >
+                <ShoppingCart className="w-5 h-5 transition-all"/>Compra de Pneu
+                </Link>
               </SheetClose>
                <SheetClose asChild>
                 <Link 
