@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { GiroSet } from "@/components/buscadores";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useRouter } from "next/navigation"; 
+import { FiltroW } from "@/components/buscarWindow";
 
 
 export default function Giro() {  
@@ -144,10 +145,11 @@ export default function Giro() {
     return null;
       }
  return (
-   <main className="sm:ml-14 p-2 bg-slate-100 h-screen md:h-auto">
-    <div className=" w-full h-auto flex items-center flex-row mb-4 mt-14 sm:mt-2">
-      <div className='w-full h-auto flex items-center flex-row gap-4'>
+   <main className="sm:ml-14 lg:ml-51 p-2 bg-slate-100 h-auto">
+    <div className=" w-full h-auto flex items-center flex-row mt-14 sm:mt-2 mb-3">
+          <div className='w-full h-auto flex items-left flex-row items-center gap-4 '>
         <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Giro de Pneus</h1> 
+        <div className='w-auto h-auto hidden sm:block'><FiltroW /></div>   
       </div>
     </div>
     <section className="sm:w-130">
@@ -162,7 +164,7 @@ export default function Giro() {
           </div>
           <CardDescription>Ordenado por giro de pneus</CardDescription>
         </CardHeader>
-        <CardContent className="">
+        <CardContent>
         <Table>
             <TableCaption></TableCaption>
             <TableHeader>

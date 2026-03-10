@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useRouter } from 'next/navigation';
+import { FiltroW } from '@/components/buscarWindow';
 
 export default function ConsultarProd() {
 
@@ -132,10 +133,11 @@ export default function ConsultarProd() {
   
 if (!autorizado) return null;
  return (  
-   <main className="sm:ml-14 sm:w-full p-2 bg-slate-100 h-screen md:h-auto">
+   <main className="sm:ml-14 lg:ml-51 sm:w-full p-2 bg-slate-100 h-dvh">
     <div className=" w-full h-auto flex items-center flex-row mt-14 sm:mt-2">
-          <div className='w-full h-auto flex items-left flex-col '>
-            <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Consultar Produtos</h1>           
+          <div className='w-full h-auto flex items-left flex-row items-center gap-4 '>
+            <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Consultar Produtos</h1>    
+            <div className='w-auto h-auto hidden sm:block'><FiltroW></FiltroW></div>       
           </div>         
    </div>
 

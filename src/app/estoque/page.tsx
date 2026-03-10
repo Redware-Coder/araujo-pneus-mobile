@@ -5,6 +5,7 @@ import { House } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { EstoqueSet } from '@/components/buscadores';
 import { useRouter } from "next/navigation"; 
+import { FiltroW } from '@/components/buscarWindow';
 
 export default function Estoque() {
 
@@ -138,10 +139,11 @@ export default function Estoque() {
   
 if (!autorizado) return null;
  return (  
-   <main className="sm:ml-14 p-2 bg-slate-100 h-screen">
-    <div className=" w-full h-auto flex items-center flex-row mt-14 sm:mt-2">
-          <div className='w-full h-auto flex items-left flex-col '>
-            <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Estoque Geral</h1>           
+   <main className="sm:ml-14 lg:ml-51 p-2 bg-slate-100 h-screen">
+    <div className=" w-full h-auto flex items-center flex-row mb-4 mt-14 sm:mt-2">
+      <div className='w-full h-auto flex items-center flex-row gap-4'>
+            <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Estoque Geral</h1>
+            <div className='w-auto h-auto hidden sm:block'><FiltroW></FiltroW></div>             
           </div>         
    </div>
 

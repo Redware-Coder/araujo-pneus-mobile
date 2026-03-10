@@ -7,6 +7,7 @@ import ChartOverview from "@/components/chart";
 import Grid from "@/components/Grid";
 import { useFiltro } from '@/components/contexts/FiltroContext';
 import { useRouter } from "next/navigation"; 
+import { FiltroW } from '@/components/buscarWindow';
 
 export default function Home() {
   
@@ -138,27 +139,11 @@ if (autorizado !== true) {
 
   return (
   
-   <main className="sm:ml-14 p-2 bg-slate-100">
+   <main className="sm:ml-14 lg:ml-51 p-2 bg-slate-100 h-auto">
     <div className=" w-full h-auto flex items-center flex-row mb-4 mt-14 sm:mt-2">
       <div className='w-full h-auto flex items-center flex-row gap-4'>
         <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Dashboard</h1>
-
-        <h2 className="text-lg text-gray-700 pl-3"> 
-          <div className='hidden'>   
-          {filtros.lojaCidade}<br></br>
-          {filtros.periodo}<br></br>
-          {filtros.dataInicial?.toISOString().split("T")[0]}<br></br>
-          {filtros.dataFinal?.toISOString().split("T")[0]}
-          </div>
-
-          {comunicacao.length > 0 && (
-          <div className='w-full h-auto items-center flex-row hidden'>            
-            {comunicacao[0].loja}<br></br>
-            {comunicacao[0].periodo}<br></br>
-            {comunicacao[0].dataini}<br></br>
-            {comunicacao[0].datafin}
-          </div>)}
-          </h2>
+        <div className='w-auto h-auto hidden sm:block'><FiltroW></FiltroW></div>
       </div>
      
     </div>

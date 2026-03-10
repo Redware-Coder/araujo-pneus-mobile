@@ -22,7 +22,6 @@ export const metadata: Metadata = {
   description:
     "Sistema integrado ao sistema local, trazendo informações de forma agrupada e rápida.",
   manifest: "/manifest.json",
-  themeColor: "#000000",
   icons: {
     icon: "/icon.png",
     apple: "/apple-icon.png",
@@ -40,7 +39,7 @@ export default function RootLayout({
           inter.className
         )}
       >
-        <FiltroProvider>
+          <FiltroProvider>
           <Sidebar></Sidebar>
           {children}
 

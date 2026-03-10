@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import ProdutosNota from '@/components/NFprodutos/indx';
 import { useRouter } from 'next/navigation';
+import { FiltroW } from '@/components/buscarWindow';
 
 export default function Compras() {
     const [open, setOpen] = useState(false);
@@ -166,10 +167,11 @@ export default function Compras() {
   
 if (!autorizado) return null;
  return (  
-   <main className="sm:ml-14 p-2 bg-slate-100 h-screen md:h-auto">
+   <main className="sm:ml-14 lg:ml-51 p-2 bg-slate-100 h-dvh">
     <div className=" w-full h-auto flex items-center flex-row mt-14 sm:mt-2">
-          <div className='w-full h-auto flex items-left flex-col '>
-            <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Compras</h1>           
+          <div className='w-full h-auto flex items-left flex-row items-center gap-4 '>
+            <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Compras</h1>    
+            <div className='w-auto h-auto hidden sm:block'><FiltroW /></div>          
           </div>         
    </div>
 

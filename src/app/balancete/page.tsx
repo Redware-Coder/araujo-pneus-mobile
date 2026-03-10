@@ -14,6 +14,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 import { useRouter } from 'next/navigation';
+import { FiltroW } from '@/components/buscarWindow';
 
 
   
@@ -38,6 +39,7 @@ export default function Balancete() {
     useEffect(() => {
       setFiltros((prev) => ({
         ...prev,
+        comportamento: 6,
         pagina: "Balancete",
         lojaCidade: "Todas",
         periodo: mesAtual
@@ -197,10 +199,11 @@ export default function Balancete() {
   if (!autorizado) return null;
   
  return (  
-   <main className="sm:ml-14 p-2 h-screen md:h-auto bg-yellow-200">
+   <main className="sm:ml-14 lg:ml-51 p-2 h-dvh md:h-dvh bg-yellow-200">
     <div className=" w-full h-auto flex items-center flex-row mt-14 sm:mt-2">
-          <div className='w-full h-auto flex items-left flex-col '>
-            <h1 className="hidden w-auto h-auto text-2xl pl-3 pt-2">DRE / Balancete</h1>           
+          <div className='w-full h-auto flex items-left flex-row items-center gap-4 '>
+            <h1 className="hidden lg:block w-auto h-auto text-2xl pl-3 pt-2">DRE / Balancete</h1>  
+            <div className='w-auto h-auto hidden sm:block'><FiltroW></FiltroW></div>           
           </div>         
    </div>
 
@@ -208,7 +211,7 @@ export default function Balancete() {
           <Card className='bg-slate-150 shadow-none border-0'>
                   
               <CardContent className='m-0 p-2 pt-0'>
-                <div className="flex items-center justify-center">
+                <div className="lg:hidden flex items-center justify-center">
                       <div className="text-[2.2vh] sm:text-lg font-normal text-gray-900">                       
                        DRE - Balancete</div>
                         <Scale className="ml-7 w-7 h-7"></Scale>

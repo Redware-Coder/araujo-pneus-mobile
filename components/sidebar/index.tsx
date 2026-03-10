@@ -52,109 +52,106 @@ export function Sidebar() {
  return (
   
    <div className="flex w-full flex-col top-0">
+    {mounted && filtros.pagina !== "Intro" && (
+    <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 lg:w-auto lg:items-start border-r bg-black sm:flex flex-col">
+      <div className="hidden lg:block w-full pl-6 h-38 pt-4 bg-[url('/wall_1.jpg')] bg-cover bg-center items-center justify-center">
+        <div className="w-36 h-28 bg-[url('/LogoFHD-BRANCO_SOMBRA.png')] bg-contain bg-center bg-no-repeat"></div>
+      </div>
+      <nav className="flex flex-col items-center lg:items-start gap-4 px-2 lg:px-3 py-5 pt-20 lg:pt-2">      
 
-    <aside className="fixed inset-y-0  left-0 z-10 hidden w-14 border-r bg-background sm:flex flex-col">
-      <nav className="flex flex-col items-center gap-4 px-2 py-5">
         <TooltipProvider>
-          <Link href="#" className="flex w-9 h-9 shrink-0 items-center justify-center
-           bg-primary text-primary-foreground rounded-full">
-            <Package className="w-4 h-4"/>
-            <span className="sr-only">Araújo Pneus</span>
-          </Link>        
-
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/main" className="flex w-9 h-9 shrink-0 items-center justify-center
-                rounded-lg text-muted-foreground transition-colors hover:text-foreground">
-                <LayoutDashboard className="w-6 h-6"/>
-                <span className="sr-only">Dashboard</span>
+              <Link href="/main" className="flex w-auto h-9 shrink-0 items-center justify-center
+                rounded-lg text-white transition-colors hover:text-amber-400">                  
+                    <LayoutDashboard className="w-6 h-6"/>
+                    <p className="ml-2 hidden lg:block">Dashboard</p>
               </Link> 
             </TooltipTrigger>
-            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
-              Dashboard</TooltipContent>
           </Tooltip>
+          
 
            <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/consultaProd" className="flex w-9 h-9 shrink-0 items-center justify-center 
-                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+              <Link href="/consultaProd" className="flex w-auto h-9 shrink-0 items-center justify-center 
+                rounded-lg text-white transition-colors hover:text-amber-400" 
                 onClick={() => setFiltros({...filtros, pagina: "Produtos"})}>
                 <Box className="w-6 h-6"/>
-                <span className="sr-only">Consultar Produtos</span>
+                <p className="ml-2 hidden lg:block">Consultar Produtos</p>
+                
               </Link> 
             </TooltipTrigger>
-            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
-              Consultar Produtos</TooltipContent>
           </Tooltip>
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/estoque" className="flex w-9 h-9 shrink-0 items-center justify-center 
-                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+              <Link href="/estoque" className="flex w-auto h-9 shrink-0 items-center justify-center 
+                rounded-lg text-white transition-colors hover:text-amber-400" 
                 onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
                 <Factory className="w-6 h-6"/>
-                <span className="sr-only">Estoque</span>
+                <p className="ml-2 hidden lg:block">Estoque</p>
               </Link> 
             </TooltipTrigger>
-            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
-              Estoque</TooltipContent>
           </Tooltip>
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/giro" className="flex w-9 h-9 shrink-0 items-center justify-center 
-                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
-                onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
-                <Repeat2 className="w-6 h-6"/>
-                <span className="sr-only">Giro de Pneus</span>
+              <Link href="/compras" className="flex w-auto h-9 shrink-0 items-center justify-center 
+                rounded-lg text-white transition-colors hover:text-amber-400" 
+                onClick={() => setFiltros({...filtros, pagina: "Compras"})}>
+                <ShoppingCart className="w-6 h-6"/>
+                <p className="ml-2 hidden lg:block">Compras</p>
               </Link> 
             </TooltipTrigger>
-            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
-              Giro de Pneus</TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/giro" className="flex w-auto h-9 shrink-0 items-center justify-center 
+                rounded-lg text-white transition-colors hover:text-amber-400" 
+                onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
+                <Repeat2 className="w-6 h-6"/>
+                <p className="ml-2 hidden lg:block">Giro de Pneus</p>
+              </Link> 
+            </TooltipTrigger>
           </Tooltip>
           
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/contas" className="flex w-9 h-9 shrink-0 items-center justify-center 
-                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+              <Link href="/balancete" className="flex w-auto h-9 shrink-0 items-center justify-center 
+                rounded-lg text-white transition-colors hover:text-amber-400" 
                 onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
                 <Scale className="w-6 h-6"/>
-                <span className="sr-only">DRE - Balantece</span>
+                <p className="ml-2 hidden lg:block">DRE - Balantece</p>
               </Link> 
             </TooltipTrigger>
-            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
-              DRE - Balantece</TooltipContent>
           </Tooltip>
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/boletosVencidos" className="flex w-9 h-9 shrink-0 items-center justify-center 
-                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+              <Link href="/boletosVencidos" className="flex w-auto h-9 shrink-0 items-center justify-center 
+                rounded-lg text-white transition-colors hover:text-amber-400" 
                 onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
                 <SquareKanban className="w-6 h-6"/>
-                <span className="sr-only">Boletos em atraso</span>
+                <p className="ml-2 hidden lg:block">Boletos em atraso</p>
               </Link> 
             </TooltipTrigger>
-            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
-              Boletos em atraso</TooltipContent>
           </Tooltip>
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/contas" className="flex w-9 h-9 shrink-0 items-center justify-center 
-                rounded-lg text-muted-foreground transition-colors hover:text-foreground" 
+              <Link href="/contas" className="flex w-auto h-9 shrink-0 items-center justify-center 
+                rounded-lg text-white transition-colors hover:text-amber-400" 
                 onClick={() => setFiltros({...filtros, pagina: "Estoque"})}>
                 <BanknoteArrowUp className="w-6 h-6"/>
-                <span className="sr-only">Contas a Receber / Pagar</span>
+                 <p className="ml-2 hidden lg:block">Contas</p>
               </Link> 
             </TooltipTrigger>
-            <TooltipContent side="right" className=" w-auto h-auto px-4 bg-black text-amber-300 rounded-lg border-b-0">
-              Contas a Receber / Pagar</TooltipContent>
           </Tooltip>
 
         </TooltipProvider>        
       </nav>
-    </aside>
+    </aside>)}
     
     {mounted && filtros.pagina !== "Intro" && (
     <div className="sm:hidden flex flex-col sm:gap-4 sm:py-4 sm:pl-14">

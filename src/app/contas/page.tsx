@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import {  Table,  TableBody,  TableCaption,  TableCell,  TableFooter,  TableHead,  TableHeader,  TableRow,} from "@/components/ui/table"
 import { useFiltro } from "@/components/contexts/FiltroContext";
 import { useRouter } from "next/navigation"; 
+import { FiltroW } from "@/components/buscarWindow";
 
 
 export default function Contas() {       
@@ -158,10 +159,11 @@ useEffect(() => {
 
 if (!autorizado) return null;
  return (
-     <main className="sm:ml-14 p-2 bg-slate-100 h-screen">
-            <div className=" w-full h-auto flex items-center flex-row mt-14 sm:mt-2">
-                <div className='w-full h-auto flex items-left flex-col '>
-                    <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Financeiro</h1>           
+     <main className="sm:ml-14 lg:ml-51 p-2 bg-slate-100 h-dvh">
+        <div className=" w-full h-auto flex items-center flex-row mt-14 sm:mt-2 mb-3">
+          <div className='w-full h-auto flex items-left flex-row items-center gap-4 '>
+                    <h1 className=" w-auto h-auto text-2xl pl-3 pt-2">Financeiro</h1> 
+                    <div className='w-auto h-auto hidden sm:block'><FiltroW /></div>              
                 </div>         
         </div>
             <section className="sm:w-140">                
