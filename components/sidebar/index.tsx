@@ -162,16 +162,16 @@ export function Sidebar() {
               <SheetTrigger asChild>
                 <Menu className="w-10 h-6 pr-4 transition-all text-yellow-400 "/>
               </SheetTrigger>
-              <div className=" w-28 h-10 mt-2 ml-28 bg-contain bg-center bg-no-repeat bg-[url('/LogoFHD-BRANCO.png')]"></div>
+              <div className=" w-28 h-10 mt-2 ml-24 bg-contain bg-center bg-no-repeat bg-[url('/LogoFHD-BRANCO.png')]"></div>
               <span className="sr-only">Logo</span>  
-              <div className="w-36 sm:w-42 flex flex-row pr-2 text-white items-center justify-end">
-                <div className="w-26">
+              <div className="w-auto flex flex-row text-white items-center justify-end">
+                <div className="w-32">
                   {filtros.pagina !== "teste" && (
-                    <div  style={{textAlign: 'right', fontSize: '11px',  }}>Loja: {filtros.lojaCidade}
+                    <div  style={{textAlign: 'right', fontSize: '11px'}}>Loja: {filtros.lojaCidade}
                     </div>)}
                   
                   {(filtros.pagina !== "Produtos" && filtros.pagina !== "Estoque") && (
-                    <div  style={{textAlign: 'right', fontSize: '11px',  }}>               
+                    <div  style={{textAlign: 'right', fontSize: '11px'}}>               
                      Período: {filtros.periodo}</div>
                     )}
 

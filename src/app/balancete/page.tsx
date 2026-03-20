@@ -197,9 +197,21 @@ export default function Balancete() {
     return ((valor || 0) / vendaProd * 100).toFixed(2) + "%";
   };
   if (!autorizado) return null;
+
+  const calcularPontoEquilibrio = (): number => {
+  const faturamento = info[0]?.faturamento || 0;
+  const custoMateria = info[0]?.custoMateria || 0;
+  const receitas = info[0]?.totalReceitas || 0;
+  const despesasFixas = info[0]?.despesasFixas || 0;
+  const dvariaveis = info[0]?.despesasVariaveis || 0;
+
+  if (faturamento === 0 || despesasFixas === 0) return 0;
+  const part1 = ((faturamento - dvariaveis - custoMateria) / faturamento);
+  return despesasFixas / part1;
+};
   
  return (  
-   <main className="flex flex-col items-center justify-center lg:items-start lg:ml-54 p-2 h-dvh md:h-dvh bg-yellow-200">
+   <main className="flex-col items-center justify-center lg:items-start lg:ml-54 p-2 h-full bg-slate-100">
     <div className=" w-full h-auto flex items-center flex-row mt-14 sm:mt-2">
           <div className='w-full h-auto flex items-left flex-row items-center gap-4 '>
             <h1 className="hidden lg:block w-auto h-auto text-2xl pl-3 pt-2">DRE / Balancete</h1>  
@@ -208,8 +220,7 @@ export default function Balancete() {
    </div>
 
         <section className="sm:w-100">
-          <Card className='bg-slate-150 shadow-none border-0'>
-                  
+          <Card className='bg-slate-150 shadow-none border-0'>                  
               <CardContent className='m-0 p-2 pt-0'>
                 <div className="lg:hidden flex items-center justify-center">
                       <div className="text-[2.2vh] sm:text-lg font-normal text-gray-900">                       
@@ -286,6 +297,7 @@ export default function Balancete() {
                                     <p>Investimentos</p><hr className='border-gray-600'></hr><br></br>
 
                                     <p className='font-bold'>Lucro Líquido Saldo</p><hr className='border-gray-600'></hr>
+                                    <p>Ponto de Equilíbrio</p><hr className='border-gray-600'></hr>
                                 </div>
                                 <div className='text-right m-0'>
                                     <p className='font-bold'>:</p><hr className='border-gray-600'></hr><br></br>
@@ -316,6 +328,7 @@ export default function Balancete() {
                                     <p>:</p><hr className='border-gray-600'></hr><br></br>
 
                                     <p className='font-bold'>:</p><hr className='border-gray-600'></hr>
+                                    <p>:</p><hr className='border-gray-600'></hr>
                                 </div>
 
                             </div>
@@ -349,6 +362,11 @@ export default function Balancete() {
                                 <p>{formatarNumero(info[0].investimentos)}</p><hr className='border-gray-600' /><br></br>
 
                                 <p className='font-bold'>{formatarNumero(info[0].lucroLiquido)}</p><hr className='border-gray-600'></hr>
+                                <p>{formatarNumero(
+                                  //(info[0].faturamento - info[0].despesasVariaveis - info[0].custoMateria) / info[0].faturamento / info[0].despesasFixas
+                                  //((info[0].faturamento - info[0].despesasVariaveis - info[0].custoMateria) / info[0].faturamento) / info[0].despesasFixas
+                                  calcularPontoEquilibrio()
+                                  )}</p><hr className='border-gray-600'></hr>
                             </div>
                             <div className='w-auto h-full text-right px-1'>
                                 <p className='font-bold'>100%</p><hr className='border-gray-600'/><br />
