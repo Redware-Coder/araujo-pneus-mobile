@@ -77,8 +77,8 @@ const API_BASE_URL = "/api/SqlApp";
     try {
       setLoading(true);
 
-      //const baseUrl = getApiBaseUrl(ip);
-      const baseUrl = "/api/SqlApp";
+      const baseUrl = getApiBaseUrl(ip);
+      //const baseUrl = "/api/SqlApp";
 
       const dadosFiltro = {
         comportamento: 1,
