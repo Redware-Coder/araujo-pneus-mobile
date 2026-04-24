@@ -52,13 +52,16 @@ export default function Home() {
     buscarIP();
   }, []);
 
-  function getApiBaseUrl(ip: string) {
-  if (ip.startsWith("177.54.239.199")) {
-    return "http://10.1.1.135:4143/api/SqlApp";
-  }
+  // 🔹 URL base da API
+ // function getApiBaseUrl(ip: string) {
+  //  if (ip.startsWith("177.54.239.199")) {
+   //   return "http://10.1.1.135:4143/api/SqlApp";
+   // }
+   // return "http://177.54.239.199:4143/api/SqlApp";
+  //}
 
-  return "http://177.54.239.199:4143/api/SqlApp";
-  
+  function getApiBaseUrl() {
+  return "/api/SqlApp";
 }
 
   function delay(ms: number) {
@@ -75,7 +78,8 @@ export default function Home() {
     try {
       setLoading(true);
 
-      const baseUrl = getApiBaseUrl(ip);
+      //const baseUrl = getApiBaseUrl(ip);
+      const baseUrl = getApiBaseUrl();
 
       const dadosFiltro = {
         comportamento: 1,
