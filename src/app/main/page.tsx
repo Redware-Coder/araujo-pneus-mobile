@@ -77,7 +77,8 @@ const API_BASE_URL = "/api/SqlApp";
     try {
       setLoading(true);
 
-      const baseUrl = getApiBaseUrl(ip);
+      //const baseUrl = getApiBaseUrl(ip);
+      const baseUrl = "/api/SqlApp";
 
       const dadosFiltro = {
         comportamento: 1,
@@ -92,8 +93,7 @@ const API_BASE_URL = "/api/SqlApp";
       };
 
       // 1️⃣ Primeiro envia filtro
-      //await fetch(`${baseUrl}/UpComunicacao`, {
-      await fetch(`${API_BASE_URL}/UpComunicacao`, {
+      await fetch(`${baseUrl}/UpComunicacao`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dadosFiltro),
@@ -105,10 +105,8 @@ const API_BASE_URL = "/api/SqlApp";
 
       // 2️⃣ Depois busca os dados
       const [dadosRes, comunicacaoRes] = await Promise.all([
-       // fetch(`${baseUrl}/Dados`, { signal }),
-        //fetch(`${baseUrl}/Comunicacao`, { signal })
-        await fetch(`${API_BASE_URL}/Dados`),
-        await fetch(`${API_BASE_URL}/Comunicacao`)
+        fetch(`${baseUrl}/Dados`, { signal }),
+        fetch(`${baseUrl}/Comunicacao`, { signal })
       ]);
 
       if (!dadosRes.ok || !comunicacaoRes.ok) {

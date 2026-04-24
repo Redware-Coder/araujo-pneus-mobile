@@ -5,24 +5,33 @@ import { useFiltro } from "@/components/contexts/FiltroContext";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const API_BASE_URL = "/api/SqlApp";
-
 export default function Splash() {
-  const { setFiltros, filtros } = useFiltro();
+  const { setFiltros } = useFiltro();
   const router = useRouter();
 
   const [id, setId] = useState("");
   const [cnpj, setCnpj] = useState("");
+  const [ip, setIp] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [dots, setDots] = useState("");
   const [empresaValida, setEmpresaValida] = useState<boolean | null>(null);
   const [licencaVencida, setLicencaVencida] = useState(false);
   const [mensagemErro, setMensagemErro] = useState("");
-
+  const [iniciarApp, setIniciarApp] = useState(false);
+  const { filtros } = useFiltro();
   const isSplash = filtros.pagina === "Intro";
 
-  // Página atual
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setIniciarApp(true);
+  }, 3000);
+
+  return () => clearTimeout(timer);
+}, []);
+
+  // 🔹 Define página atual
   useEffect(() => {
     setFiltros((prev) => ({
       ...prev,
@@ -30,22 +39,62 @@ export default function Splash() {
     }));
   }, []);
 
-  // valida empresa salva automaticamente
+  // 🔵 Animação dos pontinhos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prev) => (prev.length >= 3 ? "" : prev + "."));
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // 🔹 Busca IP externo
+  useEffect(() => {
+  if (!iniciarApp) return;
+
+  async function buscarIP() {
+    try {
+      const res = await fetch("https://api.ipify.org?format=json");
+      const data = await res.json();
+      setIp(data.ip);
+    } catch (err) {
+      console.error("Erro ao buscar IP externo", err);
+    }
+  }
+
+  buscarIP();
+}, [iniciarApp]);
+
+  // 🔹 URL base da API
+  function getApiBaseUrl(ip: string) {
+    if (ip.startsWith("177.54.239.199")) {
+      return "http://10.1.1.135:4143/api/SqlApp";
+    }
+    return "http://177.54.239.199:4143/api/SqlApp";
+  }
+
+  const API_BASE_URL = "/api/SqlApp";
+
+  // 🔹 Valida empresa salva automaticamente
   async function validarEmpresaSalva() {
     const empresaId = localStorage.getItem("empresaId");
     const empresaCnpj = localStorage.getItem("empresaCnpj");
+    
 
     if (!empresaId || !empresaCnpj) {
       setEmpresaValida(false);
       return;
     }
 
+    //const baseUrl = getApiBaseUrl(ip);
+    const baseUrl = "/api/SqlApp";
+
     try {
       const response = await fetch(
-        `${API_BASE_URL}/ConfirmarEmpresa?id=${empresaId}&cnpj=${empresaCnpj}`
+        `${baseUrl}/ConfirmarEmpresa?id=${empresaId}&cnpj=${empresaCnpj}`
       );
 
       if (!response.ok) {
+        setMensagemErro("Erro ao conectar com servidor.");
         setEmpresaValida(false);
         return;
       }
@@ -53,18 +102,20 @@ export default function Splash() {
       const dados = await response.json();
       const empresa = dados[0];
 
+      // 🔎 Verifica validade APÓS receber dados da API
       const dataValidade = new Date(empresa.validade);
       const agora = new Date();
 
       if (dataValidade < agora) {
+        const dataFormatada = dataValidade.toLocaleString("pt-BR");
         setLicencaVencida(true);
-        setMensagemErro("Sua licença expirou");
+        setMensagemErro(`Sua licença expirou em ${dataFormatada}`);
         setEmpresaValida(false);
         return;
       }
 
+      // ✅ Licença válida
       setEmpresaValida(true);
-
       setFiltros((prev) => ({
         ...prev,
         dev: "start",
@@ -73,102 +124,139 @@ export default function Splash() {
       localStorage.setItem("empresa", JSON.stringify(empresa));
 
     } catch (error) {
+      console.error(error);
+      setMensagemErro("Erro ao conectar com servidor.");
       setEmpresaValida(false);
     }
   }
 
+  // 🔹 Executa validação automática assim que IP estiver carregado
   useEffect(() => {
-    validarEmpresaSalva();
-  }, []);
+    if (ip) validarEmpresaSalva();
+  }, [ip]);
 
-  // redireciona
+  // 🔹 Redireciona automático se empresa válida
   useEffect(() => {
     if (empresaValida) {
-      const fadeTimer = setTimeout(() => setFadeOut(true), 3000);
-      const redirectTimer = setTimeout(() => router.push("/main"), 4000);
+      const fadeTimer = setTimeout(() => setFadeOut(true), 4500);
+      const redirectTimer = setTimeout(() => router.push("/main"), 5500);
 
       return () => {
         clearTimeout(fadeTimer);
         clearTimeout(redirectTimer);
       };
     }
-  }, [empresaValida]);
+  }, [empresaValida, router]);
 
+  // 🔹 Valida empresa ao clicar no botão
   async function validarEmpresa() {
-    if (!id || !cnpj) return;
-
-    setLoading(true);
-    setMensagemErro("");
+    if (!id || !cnpj) {
+      alert("Informe o código DEV da empresa e o CNPJ");
+      return;
+    }
 
     try {
+      setLoading(true);
+      setMensagemErro("");
+
+      const baseUrl = getApiBaseUrl(ip);
+
       const cnpjNumeros = cnpj.replace(/\D/g, "");
-      const idNumeros = id.replace(/\D/g, "");
+      const idNumeros = id.replace(/\D/g, ""); // caso queira limpar o id também
 
       const response = await fetch(
-        `${API_BASE_URL}/ConfirmarEmpresa?id=${idNumeros}&cnpj=${cnpjNumeros}`
+        `${baseUrl}/ConfirmarEmpresa?id=${idNumeros}&cnpj=${cnpjNumeros}`
       );
 
-      if (!response.ok) {
-        setMensagemErro("Erro ao validar empresa");
+      if (response.status === 404) {
+        setMensagemErro("Empresa não cadastrada.");
         return;
+      }
+
+      if (!response.ok) {
+        throw new Error("Erro na API");
       }
 
       const dados = await response.json();
       const empresa = dados[0];
 
+      // 🔎 Verifica validade antes de continuar
       const dataValidade = new Date(empresa.validade);
-      if (dataValidade < new Date()) {
+      const agora = new Date();
+      if (dataValidade < agora) {
         setLicencaVencida(true);
-        setMensagemErro("Licença expirada");
+        setMensagemErro("Licença expirou");
         return;
       }
 
+      // 🪟 Mostra confirm com dados da empresa
       const confirmar = window.confirm(
-        `Empresa: ${empresa.razao}\nCNPJ: ${empresa.cnpj}\nContinuar?`
+        `Confirme os dados da empresa:\n\n` +
+        `Nome: ${empresa.razao}\n` +
+        `CNPJ: ${empresa.cnpj}\n` +
+        `Validade: ${dataValidade.toLocaleString("pt-BR")}\n\n` +
+        `Deseja continuar?`
       );
 
       if (!confirmar) return;
 
+      // ✅ Salva dados
       localStorage.setItem("empresaId", id);
-      localStorage.setItem("empresaCnpj", cnpjNumeros);
+      localStorage.setItem("empresaCnpj", cnpj.replace(/\D/g, ""));
       localStorage.setItem("empresa", JSON.stringify(empresa));
 
       router.push("/main");
 
     } catch (error) {
-      setMensagemErro("Erro ao conectar com servidor");
+      console.error(error);
+      setMensagemErro("Erro ao conectar com servidor.");
     } finally {
       setLoading(false);
     }
   }
 
   function formatCNPJ(value: string) {
-    let v = value.replace(/\D/g, "");
-    v = v.replace(/^(\d{2})(\d)/, "$1.$2");
-    v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
-    v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
-    v = v.replace(/(\d{4})(\d)/, "$1-$2");
-    return v.slice(0, 18);
-  }
+  let v = value.replace(/\D/g, ""); // remove tudo que não é número
 
-  if (empresaValida === null) {
-    return (
-      <main className="bg-black h-dvh flex items-center justify-center text-white">
-        Carregando...
-      </main>
-    );
-  }
+  v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+  v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+  v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+  v = v.replace(/(\d{4})(\d)/, "$1-$2");
+
+  return v.slice(0, 18); // limita a 18 caracteres
+  
+}
 
   return (
     <main className="bg-black h-dvh flex items-center justify-center overflow-hidden">
-      <div
-        className="flex flex-col items-center text-white transition-opacity"
-        style={{ opacity: fadeOut ? 0 : 1 }}
-      >
-        <div className="w-40 h-16 bg-[url('/REDWAREMOB.png')] bg-contain bg-center bg-no-repeat mb-6" />
+    <div
+      className="w-full h-full flex flex-col justify-center items-center px-6"
+      style={{
+        color: "white",
+        opacity: fadeOut ? 0 : 1,
+        transition: "opacity 0.9s ease",
+      }}
+    >
 
+        <div
+          className="w-40 mb-6 h-16  bg-[url('/REDWAREMOB.png')]
+          bg-contain bg-center bg-no-repeat"
+        ></div>
+
+        {/* ✅ Se empresa já existe e é válida */}
+        {empresaValida && (
+        <div className="mt-12 flex flex-col gap-3 items-center w-60">
+          <p></p>
+
+          <div className="h-1 w-2/3 rounded bg-gray-800 overflow-hidden relative">
+            <div className="absolute inset-0 bg-linear-to-r from-transparent via-gray-600 to-transparent animate-shimmer"></div>
+          </div>
+        </div>
+        )}
+
+        {/* ❌ Se não existe empresa ou licença expirada */}
         {empresaValida === false && (
-          <div className="w-60 flex flex-col gap-3">
+          <div className="mt-0 w-50 max-w-xs flex flex-col gap-4">
             <Input
               placeholder="Código Dev"
               value={id}
@@ -179,28 +267,35 @@ export default function Splash() {
               value={cnpj}
               onChange={(e) => setCnpj(formatCNPJ(e.target.value))}
             />
-            <Button onClick={validarEmpresa} className="bg-red-700">
-              {loading ? "Validando..." : "Continuar"}
+            <Button className="bg-red-700" type="button" onClick={validarEmpresa}>
+              Continuar
             </Button>
 
-            {mensagemErro && (
-              <p className="text-red-500 text-sm text-center">
-                {mensagemErro}
-              </p>
+            {/* 🔴 Mensagem só após verificação com API */}
+            {mensagemErro && (              
+              <div >
+              <p className="text-red-500 text-sm text-center">{mensagemErro}</p><br /> 
+              <a
+                href="https://wa.me/5598981897562?text=Olá,%20preciso%20de%20suporte."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full h-8 text-white bg-green-700 text-sm rounded-3xl p-1 gap-2 flex flex-row justify-center items-center"
+              >
+                <span>Suporte</span>           
+              <div className="w-6 h-6 bg-[url('/whats.png')] bg-contain bg-center bg-no-repeat"></div>                
+              </a>        
+
+              <p className="text-sm text-center hidden">Toque para renovação.</p>
+              </div>              
             )}
           </div>
         )}
+    
+            <p className="fixed bottom-0 left-0 w-full text-center font-light text-xs tracking-wide text-gray-200 pb-5 opacity-70">
+               ©2026 Redware Informática. <br /> Todos os direitos reservados.</p>
 
-        {empresaValida && (
-          <div className="mt-10 text-gray-300 text-sm">
-            Iniciando sistema...
-          </div>
-        )}
-
-        <p className="fixed bottom-2 text-xs text-gray-400">
-          ©2026 Redware Informática
-        </p>
       </div>
+      
     </main>
   );
 }
