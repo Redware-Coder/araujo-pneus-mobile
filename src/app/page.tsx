@@ -83,8 +83,7 @@ export default function Splash() {
       return;
     }
 
-    //const baseUrl = getApiBaseUrl(ip);
-    const baseUrl = "/api/SqlApp";
+    const baseUrl = getApiBaseUrl(ip);
 
     try {
       const response = await fetch(
